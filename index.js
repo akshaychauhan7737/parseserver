@@ -4,6 +4,8 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
+var ParseDashboard = require('parse-dashboard');
+
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
 
@@ -16,7 +18,7 @@ var api = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'APPLICATION_ID',
   masterKey: process.env.MASTER_KEY || 'MASTER_KEY', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'https://akshaychauhan.herokuapp.com/parse',  // Don't forget to change to https if needed
+  serverURL: process.env.SERVER_URL || 'https://localhost:1337/parse',  // Don't forget to change to https if needed
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
@@ -31,11 +33,10 @@ var mountPath = process.env.PARSE_MOUNT || '/parse';
 app.use(mountPath, api);
 
 //setup dashboard
-var ParseDashboard = require('parse-dashboard');
 var dashboard = new ParseDashboard({
   "apps": [
     {
-      "serverURL": process.env.SERVER_URL || 'https://akshaychauhan.herokuapp.com/parse',
+      "serverURL": process.env.SERVER_URL || 'https://localhost:1337/parse',
       "appId": process.env.APP_ID || 'APPLICATION_ID',
       "masterKey": process.env.MASTER_KEY || 'MASTER_KEY'
     }
