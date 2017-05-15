@@ -26,6 +26,9 @@ var api = new ParseServer({
 // javascriptKey, restAPIKey, dotNetKey, clientKey
 
 var app = express();
+// Serve the Parse API on the /parse URL prefix
+var mountPath = process.env.PARSE_MOUNT || '/parse';
+app.use(mountPath, api);
 
 //setup dashboard
 var ParseDashboard = require('parse-dashboard');
@@ -53,9 +56,7 @@ app.use('/dashboard', dashboard);
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
 
-// Serve the Parse API on the /parse URL prefix
-var mountPath = process.env.PARSE_MOUNT || '/parse';
-app.use(mountPath, api);
+
 
 // Parse Server plays nicely with the rest of your web routes
 app.get('/', function(req, res) {
