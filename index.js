@@ -16,7 +16,7 @@ var api = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'APPLICATION_ID',
   masterKey: process.env.MASTER_KEY || 'MASTER_KEY', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'https://localhost:1337/parse',  // Don't forget to change to https if needed
+  serverURL: process.env.SERVER_URL || 'https://akshaychauhan.herokuapp.com/',  // Don't forget to change to https if needed
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
@@ -26,6 +26,30 @@ var api = new ParseServer({
 // javascriptKey, restAPIKey, dotNetKey, clientKey
 
 var app = express();
+
+//setup dashboard
+var ParseDashboard = require('parse-dashboard');
+var dashboard = new ParseDashboard({
+  "apps": [
+    {
+      "serverURL": process.env.SERVER_URL || 'https://akshaychauhan.herokuapp.com/',
+      "appId": process.env.APP_ID || 'APPLICATION_ID',
+      "masterKey": process.env.MASTER_KEY || 'MASTER_KEY',
+      "appName": process.env.APP_ID || 'myAppId'
+    }
+  ],
+  "users": [
+    {
+      "user":"akshay",
+      "pass":"root"
+    }
+  ]
+},true);
+
+app.use('/dashboard', dashboard);
+//setup dashboard complete
+
+
 
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
