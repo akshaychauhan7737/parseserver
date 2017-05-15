@@ -34,8 +34,7 @@ var dashboard = new ParseDashboard({
     {
       "serverURL": process.env.SERVER_URL || 'https://akshaychauhan.herokuapp.com/parse',
       "appId": process.env.APP_ID || 'APPLICATION_ID',
-      "masterKey": process.env.MASTER_KEY || 'MASTER_KEY',
-      "appName": process.env.APP_ID || 'myAppId'
+      "masterKey": process.env.MASTER_KEY || 'MASTER_KEY'
     }
   ],
   "users": [
