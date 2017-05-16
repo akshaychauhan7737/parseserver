@@ -11,8 +11,8 @@ if (!databaseUri) {
   console.log('DATABASE_URI not specified, falling back to localhost.');
 }
 
-var api = new ParseServer({
-  databaseURI: databaseUri || 'mongodb://admin:admin@ds143231.mlab.com:43231/akshay',
+var api = new ParseServer({mongodb:
+  databaseURI: databaseUri || 'mongodb://admin:root@ds143141.mlab.com:43141/akshay',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'APPLICATION_ID',
   masterKey: process.env.MASTER_KEY || 'MASTER_KEY', //Add your master key here. Keep it secret!
